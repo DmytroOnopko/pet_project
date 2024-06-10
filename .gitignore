@@ -1,0 +1,11 @@
+# Node artifact files
+db/node_modules/
+db/dist/
+
+client/node_modules/
+client/dist/
+
+# JetBrains IDE
+.idea/
+
+.env.*
