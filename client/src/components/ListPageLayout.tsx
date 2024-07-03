@@ -1,15 +1,16 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 import { ReactNode } from 'react';
+import { Paths } from '../shell/paths';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 
 type Props = {
   title: ReactNode;
   list: ReactNode;
 
-  breadcrumbs?: ReactNode;
   actions?: ReactNode;
   search?: ReactNode;
   sort?: ReactNode;
-  pagination?: ReactNode;
+  breadcrumbs?: { title: string; to?: Paths }[];
 };
 
 export const ListPageLayout = ({
@@ -18,18 +19,22 @@ export const ListPageLayout = ({
   search,
   sort,
   list,
-  pagination,
-  breadcrumbs,
+  breadcrumbs = [],
 }: Props) => {
   return (
     <Container
       sx={{
         padding: ({ spacing }) => spacing(3, 2),
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
       }}
       disableGutters
       maxWidth={false}
     >
-      {breadcrumbs && <Box mb={2}>{breadcrumbs}</Box>}
+      {!!breadcrumbs?.length && <Breadcrumbs items={breadcrumbs} />}
+
       <Box
         display="flex"
         justifyContent="space-between"
@@ -44,24 +49,17 @@ export const ListPageLayout = ({
         </Box>
       </Box>
 
-      {search && <Box mt={2}>{search}</Box>}
+      {search && <Box>{search}</Box>}
 
       {sort && (
-        <Box display="flex" justifyContent="end" mt={2}>
+        <Box display="flex" justifyContent="end">
           {sort}
         </Box>
       )}
 
-      <Box mt={1}>{list}</Box>
-
-      {pagination}
+      <Stack flexDirection="column" flex={1}>
+        {list}
+      </Stack>
     </Container>
   );
 };
-
-// const Container = styled(Box)`
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   padding: ${({ theme }) => theme.spacing(3, 2, 0)};
-// `;

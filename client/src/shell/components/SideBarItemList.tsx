@@ -1,4 +1,3 @@
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import {
   Box,
   Collapse,
@@ -13,14 +12,7 @@ import { lighten } from '@mui/system/colorManipulator';
 import { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { Paths } from '../paths';
-
-interface SideBarItem {
-  path: Paths;
-  title: ReactNode;
-  icon: ReactNode;
-  children?: Omit<SideBarItem, 'icon'>[];
-}
+import { SideBarItem } from '../components/types';
 
 interface Props {
   items?: SideBarItem[];

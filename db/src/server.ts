@@ -9,7 +9,12 @@ import { userRouter } from './user/user.router';
 dotenv.config();
 
 const app = express();
-const uri = `${process.env.MONGODB_URI}${process.env.MONGODB_NAME}`;
+const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_NAME}.nvadcft.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.MONGODB_NAME}`;
+const clientOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: { version: '1', strict: true, deprecationErrors: true },
+};
 
 mongoose
   .connect(uri)

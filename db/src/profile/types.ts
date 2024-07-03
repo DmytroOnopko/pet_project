@@ -12,8 +12,8 @@ export interface Location {
 }
 
 export interface Profile extends Omit<User, 'refreshToken'> {
-  location: Location;
-  description: string;
+  location?: Location;
+  description?: string;
   registrationTime: Milliseconds;
   expiredTime: Milliseconds;
   birthday: Milliseconds;

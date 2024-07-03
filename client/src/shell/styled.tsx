@@ -55,9 +55,7 @@ export const MainContent = styled(Box, {
   flex: 1,
   flexDirection: 'column',
   flexGrow: 1,
-  height: 'calc(100% - 120px)',
   width: `calc(100% - ${drawerWidth}px)`,
-  overflow: 'auto',
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,

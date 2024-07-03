@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { Shell } from './shell/Shell';
+import { loginRoutes } from './login/router';
 import { profileRoutes } from './profile/router';
 import { vehicleRoutes } from './vehicle/router';
 
@@ -11,4 +12,5 @@ export const router = createBrowserRouter([
     errorElement: <div>Page not found</div>,
     children: [...profileRoutes, ...vehicleRoutes],
   },
+  ...loginRoutes,
 ]);
