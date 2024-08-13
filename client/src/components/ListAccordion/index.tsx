@@ -8,6 +8,7 @@ import {
   Grid,
 } from '@mui/material';
 import { Children, ReactNode, useState } from 'react';
+import { useTypedTranslation } from '../hooks/useTypedTranslation';
 
 interface Props {
   summary: ReactNode[];
@@ -92,25 +93,29 @@ const ExpandButton = ({
   onExpand(): void;
   expand: boolean;
   isEmpty?: boolean;
-}) => (
-  <Box
-    sx={{
-      width: '100%',
-      textAlign: isEmpty ? 'right' : 'left',
-    }}
-  >
-    <Button
-      onClick={onExpand}
+}) => {
+  const { t } = useTypedTranslation();
+
+  return (
+    <Box
       sx={{
-        textTransform: 'capitalize',
-        borderColor: ({ palette }) => palette.text.disabled,
-        color: ({ palette }) => palette.text.disabled,
-        width: { xs: '50%', sm: '25%', md: 'auto' },
+        width: '100%',
+        textAlign: isEmpty ? 'right' : 'left',
       }}
-      color="inherit"
-      variant="outlined"
     >
-      {expand ? 'Collapse' : 'Expand'}
-    </Button>
-  </Box>
-);
+      <Button
+        onClick={onExpand}
+        sx={{
+          textTransform: 'capitalize',
+          borderColor: ({ palette }) => palette.text.disabled,
+          color: ({ palette }) => palette.text.disabled,
+          width: { xs: '50%', sm: '25%', md: 'auto' },
+        }}
+        color="inherit"
+        variant="outlined"
+      >
+        {expand ? t('collapse') : t('expand')}
+      </Button>
+    </Box>
+  );
+};

@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { LocaleSelect } from '../components/LocaleSelect';
 
 import { useSideBarItems } from './components/useSideBarItems';
 import { DesktopSidebar } from './components/SidebarView/DesktopSidebar';
@@ -43,6 +44,7 @@ export const Shell = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: 2,
           }}
         >
           <Stack gap={2} flexDirection="row" alignItems="center">
@@ -57,6 +59,10 @@ export const Shell = () => {
             )}
             <TitleLogo title="Pet Project" />
           </Stack>
+          <Box marginLeft="auto">
+            <LocaleSelect />
+          </Box>
+
           <HeaderUserInfo />
         </Container>
       </AppBar>

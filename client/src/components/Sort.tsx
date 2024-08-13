@@ -1,4 +1,5 @@
 import { alpha, Button, Stack, Typography } from '@mui/material';
+import { useTypedTranslation } from '../components/hooks/useTypedTranslation';
 import { FieldOption, SortDirection } from '../core/types';
 import { SortKey } from '../profile/list/domain';
 import { Select } from '../components/Select';
@@ -17,6 +18,8 @@ interface Props {
 }
 
 export const Sort = ({ items, onChange, sortKey, sortDirection }: Props) => {
+  const { t } = useTypedTranslation();
+
   return (
     <Stack
       sx={{
@@ -32,7 +35,7 @@ export const Sort = ({ items, onChange, sortKey, sortDirection }: Props) => {
           typography: 'body2',
         }}
       >
-        Sort by:
+        {t('sortBy')}
       </Typography>
       <Direction
         sortDirection={sortDirection}

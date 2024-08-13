@@ -2,6 +2,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
+import { useTypedTranslation } from '../../../components/hooks/useTypedTranslation';
 import { LoginForm } from '../../domain';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 
 export const Password = ({ control }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTypedTranslation();
 
   return (
     <Controller
@@ -18,7 +20,7 @@ export const Password = ({ control }: Props) => {
       render={({ field, fieldState, formState }) => (
         <TextField
           required
-          label="Password"
+          label={t('password')}
           variant="outlined"
           type={showPassword ? 'text' : 'password'}
           value={field.value}

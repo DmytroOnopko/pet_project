@@ -1,3 +1,4 @@
+import { useTypedTranslation } from '../../../../components/hooks/useTypedTranslation';
 import {
   BodyRow,
   HeaderTableCellText,
@@ -29,16 +30,22 @@ export const Desktop = (props: TableListProps<Profile>) => {
   );
 };
 
-const Header = () => (
-  <HeaderTableRow>
-    <HeaderTableCellText>Name</HeaderTableCellText>
-    <HeaderTableCellText>Email</HeaderTableCellText>
-    <HeaderTableCellText>Birthday</HeaderTableCellText>
-    <HeaderTableCellText>Status </HeaderTableCellText>
-    <HeaderTableCellText>Location</HeaderTableCellText>
-    <HeaderTableCellText sx={{ width: '40px' }}>Actions</HeaderTableCellText>
-  </HeaderTableRow>
-);
+const Header = () => {
+  const { t } = useTypedTranslation();
+
+  return (
+    <HeaderTableRow>
+      <HeaderTableCellText>{t('name')}</HeaderTableCellText>
+      <HeaderTableCellText>{t('email')}</HeaderTableCellText>
+      <HeaderTableCellText>{t('birthday')}</HeaderTableCellText>
+      <HeaderTableCellText>{t('status')} </HeaderTableCellText>
+      <HeaderTableCellText>{t('location')}</HeaderTableCellText>
+      <HeaderTableCellText sx={{ width: '40px' }}>
+        {t('actions')}
+      </HeaderTableCellText>
+    </HeaderTableRow>
+  );
+};
 
 const Body = ({ data = [], isLoading, onRemove }: TableListProps<Profile>) => {
   return (

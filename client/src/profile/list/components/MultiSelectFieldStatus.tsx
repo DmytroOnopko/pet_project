@@ -1,6 +1,7 @@
 import React from 'react';
 import { Control } from 'react-hook-form';
-import { MultiSelectField } from '../../../components/Fields/MultiSelectField';
+import { useTypedTranslation } from '../../../components/hooks/useTypedTranslation';
+import { MultiSelectField } from '../../../components/MultiSelectField';
 import { ProfileSearchForm, ProfileStatus } from '../../../profile/list/domain';
 
 interface Props {
@@ -8,19 +9,20 @@ interface Props {
 }
 
 export const MultiSelectFieldStatus = ({ control }: Props) => {
+  const { t } = useTypedTranslation();
+
+  const options = [
+    { value: ProfileStatus.ACTIVE, label: t('active') },
+    { value: ProfileStatus.NOT_ACTIVE, label: t('notActive') },
+  ];
+
   return (
     <MultiSelectField
       required
       control={control}
       name={'status'}
-      label={'Status'}
+      label={t('status')}
       options={options}
     />
   );
 };
-
-const options = [
-  { value: ProfileStatus.ACTIVE, label: 'Active' },
-  { value: ProfileStatus.NOT_ACTIVE, label: 'Not Active' },
-  { value: 'Active2', label: 'Active2' },
-];

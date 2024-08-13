@@ -47,6 +47,11 @@ export const DatePicker = ({
           slotProps={{
             textField: { required, disabled },
           }}
+          sx={{
+            '& .MuiFormLabel-root > .MuiFormLabel-asterisk': {
+              color: ({ palette }) => palette.error.main,
+            },
+          }}
         />
         {error && <FormHelperText error>{error.message}</FormHelperText>}
       </FormControl>

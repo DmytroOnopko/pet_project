@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { lighten } from '@mui/system/colorManipulator';
 import { Children, PropsWithChildren } from 'react';
+import { useTypedTranslation } from '../hooks/useTypedTranslation';
 
 import { TableProos } from './types';
 
@@ -129,29 +130,33 @@ export const TableDataCell = ({
   </TableCell>
 );
 
-const TableEmpty = () => (
-  <BodyRow
-    sx={{
-      background: 'transparent',
-    }}
-  >
-    <TableDataCell
-      colSpan={6}
-      typographyProps={{
-        sx: {
-          textAlign: 'center',
-          color: ({ palette }) => palette.text.disabled,
-          fontWeight: 700,
-        },
-      }}
+const TableEmpty = () => {
+  const { t } = useTypedTranslation();
+
+  return (
+    <BodyRow
       sx={{
-        borderBottom: 'none',
+        background: 'transparent',
       }}
     >
-      Empty data
-    </TableDataCell>
-  </BodyRow>
-);
+      <TableDataCell
+        colSpan={6}
+        typographyProps={{
+          sx: {
+            textAlign: 'center',
+            color: ({ palette }) => palette.text.disabled,
+            fontWeight: 700,
+          },
+        }}
+        sx={{
+          borderBottom: 'none',
+        }}
+      >
+        {t('emptyData')}
+      </TableDataCell>
+    </BodyRow>
+  );
+};
 
 const TableLoading = () => (
   <BodyRow

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
+import { useTypedTranslation } from '../../../components/hooks/useTypedTranslation';
 import { MultiSelectFieldStatus } from './MultiSelectFieldStatus';
 import { ProfileSearchForm } from '../../../profile/list/domain';
-import { DateField } from '../../../components/Fields/DateField';
+import { DateField } from '../../../components/DateField';
 import { Search } from '../../../components/Search';
 import { ListAccordionActions } from '../../../components/ListAccordion/ListAccordionActions';
 import { ListAccordionLayout } from '../../../components/ListAccordion';
@@ -15,13 +16,14 @@ interface Props {
 
 export const AdvancedProfileSearch = ({ form, onClear, onApply }: Props) => {
   const [search, setSearch] = useState('');
+  const { t } = useTypedTranslation();
 
   return (
     <ListAccordionLayout
       summary={[
         <Search
           key="search"
-          label="Search"
+          label={t('search')}
           value={search}
           onChange={(value) => setSearch(value)}
           onClear={() => setSearch('')}
@@ -35,14 +37,14 @@ export const AdvancedProfileSearch = ({ form, onClear, onApply }: Props) => {
         <DateField
           required
           key="DateFieldFrom"
-          label="Date From"
+          label={t('dateFrom')}
           name="startFrom"
           control={form.control}
         />,
         <DateField
           required
           key="DateFieldTo"
-          label="Date To"
+          label={t('dateTo')}
           name="startTo"
           control={form.control}
         />,

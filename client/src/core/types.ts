@@ -25,3 +25,8 @@ export interface SortParams<SortKey extends string> {
   sortDirection: SortDirection;
   sortKey: SortKey;
 }
+
+export enum Locale {
+  EN = 'en',
+  UA = 'ua',
+}

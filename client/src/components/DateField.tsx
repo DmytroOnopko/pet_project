@@ -1,39 +1,41 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { FieldOption } from '../../core/types';
-import { MultiSelect } from '../../components/MultiSelect';
+import { DatePicker } from '../components/DatePicker';
 
 interface Props<Form extends FieldValues> {
   control: Control<Form>;
   name: Path<Form>;
-  options: FieldOption[];
 
   label?: ReactNode;
+  minDate?: Date;
+  maxDate?: Date;
   required?: boolean;
   disabled?: boolean;
 }
 
-export function MultiSelectField<Form extends FieldValues>({
+export function DateField<Form extends FieldValues>({
   control,
-  name,
+  maxDate,
+  minDate,
   label,
+  name,
   required,
   disabled,
-  options,
 }: Readonly<Props<Form>>) {
   return (
     <Controller
       control={control}
       name={name}
-      render={({ field, fieldState }) => (
-        <MultiSelect
+      render={({ field, fieldState, formState }) => (
+        <DatePicker
           label={label}
-          selected={field.value}
+          value={field.value}
           onChange={field.onChange}
-          errorMsg={fieldState.error?.message}
+          error={fieldState.error}
+          maxDate={maxDate}
+          minDate={minDate}
+          disabled={disabled || formState.isSubmitting}
           required={required}
-          disabled={disabled}
-          options={options}
         />
       )}
     />

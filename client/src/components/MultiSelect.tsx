@@ -7,12 +7,8 @@ import {
   TextField,
 } from '@mui/material';
 import { ReactNode } from 'react';
+import { useTypedTranslation } from '../components/hooks/useTypedTranslation';
 import { FieldOption } from '../core/types';
-
-const all: FieldOption = {
-  label: 'All',
-  value: 'all',
-};
 
 interface Props {
   options: FieldOption[];
@@ -34,6 +30,13 @@ export function MultiSelect({
   required = false,
   disabled = false,
 }: Props) {
+  const { t } = useTypedTranslation();
+
+  const all: FieldOption = {
+    label: t('all'),
+    value: 'all',
+  };
+
   const sortedOptions = options.sort((a, b) => a.label.localeCompare(b.label));
   const sortedOptionsWithAll = [all, ...sortedOptions];
 
@@ -101,7 +104,7 @@ export function MultiSelect({
             {...params}
             label={label}
             required={required}
-            placeholder={`Select ${label}`}
+            placeholder={`${t('select')} ${label}`}
           />
         )}
       />

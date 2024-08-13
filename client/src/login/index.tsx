@@ -1,5 +1,6 @@
 import React from 'react';
-import { Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
+import { LocaleSelect } from '../components/LocaleSelect';
 import { Title } from './components/Title';
 import { Button } from './components/Button';
 import { useForm } from './services/useForm';
@@ -13,6 +14,15 @@ export const Login = () => {
 
   return (
     <Stack width="100%" height="100%">
+      <Box
+        sx={{
+          width: 85,
+          p: 1,
+          marginLeft: 'auto',
+        }}
+      >
+        <LocaleSelect />
+      </Box>
       <Stack
         sx={{
           width: { xs: 'calc(100% - 32px)', sm: 320 },

@@ -1,3 +1,4 @@
+import { useTypedTranslation } from '../../components/hooks/useTypedTranslation';
 import { Sort } from '../../components/Sort';
 import { useProfile } from '../../profile/list/useProfile';
 import { AdvancedProfileSearch } from '../../profile/list/components/AdvancedProfileSearch';
@@ -8,20 +9,23 @@ import { ListPageLayout } from '../../components/ListPageLayout';
 
 export const List = () => {
   const { form, sort } = useProfile();
+  const { t } = useTypedTranslation();
+
+  const breadcrumbs = [
+    { title: t('profiles'), to: Paths.PROFILE },
+    { title: t('list') },
+  ];
 
   return (
     <ListPageLayout
       breadcrumbs={breadcrumbs}
-      title={'Profiles'}
+      title={t('profiles')}
       list={<TableLayout />}
       sort={<Sort {...sort} />}
-      actions={<TableCreateAction title="Add Profile" onClick={() => null} />}
+      actions={
+        <TableCreateAction title={t('addProfile')} onClick={() => null} />
+      }
       search={<AdvancedProfileSearch {...form} />}
     />
   );
 };
-
-const breadcrumbs = [
-  { title: 'Profile', to: Paths.PROFILE },
-  { title: 'List' },
-];

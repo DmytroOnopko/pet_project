@@ -1,3 +1,4 @@
+import { useTypedTranslation } from '../../../components/hooks/useTypedTranslation';
 import { FieldOption, SortDirection } from '../../../core/types';
 import { ProfileSearchParams, SortKey } from '../../../profile/list/domain';
 
@@ -7,6 +8,19 @@ interface Props {
 }
 
 export const useSort = ({ params, saveParams }: Props) => {
+  const { t } = useTypedTranslation();
+
+  const items: Record<SortKey, FieldOption<SortKey>> = {
+    [SortKey.NAME]: {
+      value: SortKey.NAME,
+      label: t('name'),
+    },
+    [SortKey.BIRTHDAY]: {
+      value: SortKey.BIRTHDAY,
+      label: t('birthday'),
+    },
+  };
+
   return {
     items: (Object.keys(items) as SortKey[]).map((key) => items[key]),
     sortKey: items[params.sortKey],
@@ -22,15 +36,4 @@ export const useSort = ({ params, saveParams }: Props) => {
       });
     },
   };
-};
-
-const items: Record<SortKey, FieldOption<SortKey>> = {
-  [SortKey.NAME]: {
-    value: SortKey.NAME,
-    label: SortKey.NAME,
-  },
-  [SortKey.BIRTHDAY]: {
-    value: SortKey.BIRTHDAY,
-    label: SortKey.BIRTHDAY,
-  },
 };
