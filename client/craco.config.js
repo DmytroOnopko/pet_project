@@ -12,6 +12,14 @@ module.exports = {
     },
   ],
   webpack: {
+    configure: (webpackConfig) => {
+      webpackConfig.module.rules.push({
+        test: /mapbox-gl-csp-worker\.js$/,
+        use: { loader: 'worker-loader' },
+      });
+
+      return webpackConfig;
+    },
     alias: {
       '@mui/styled-engine': '@mui/styled-engine-sc',
     },
