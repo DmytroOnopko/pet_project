@@ -26,5 +26,9 @@
   "sortBy": "Sort by:",
   "dashboard": "Dashboard",
   "map": "Map",
-  "vehicles": "Vehicles"
+  "vehicles": "Vehicles",
+  "streets": "streets",
+  "satellite": "satellite",
+  "dark": "dark",
+  "light": "light"
 }
