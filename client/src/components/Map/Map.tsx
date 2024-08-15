@@ -1,75 +1,50 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
-import mapboxgl from 'mapbox-gl';
+import { useState } from 'react';
 import {
-  Map as MapBox,
   NavigationControl,
   GeolocateControl,
   ScaleControl,
-  ViewState,
-  GeolocateControlProps,
-  NavigationControlProps,
-  ScaleControlProps,
 } from 'react-map-gl';
-import { Box, BoxProps } from '@mui/material';
-import { StyleSwitcher } from './MapStyleSwitcher';
+import { Box } from '@mui/material';
+import { useTypedTranslation } from '../hooks/useTypedTranslation';
+import { BaseMap } from './BaseMap';
+import {
+  getMapStyles,
+  MapStyleConfig,
+  MapStyleSwitcher,
+} from '../Map/MapStyleSwitcher';
 
-mapboxgl.workerClass = require('mapbox-gl/dist/mapbox-gl-csp-worker').default;
+export const Map = () => {
+  const { t } = useTypedTranslation();
+  const [styleConfig, setStyleConfig] = useState(getMapStyles(t).streets);
 
-interface Props extends BoxProps {
-  GeolocateControlProps?: GeolocateControlProps;
-  NavigationControlProps?: NavigationControlProps;
-  ScaleControlProps?: ScaleControlProps;
-}
+  const handleStyleConfig = (config: MapStyleConfig) => setStyleConfig(config);
 
-export const Map = ({
-  GeolocateControlProps,
-  NavigationControlProps,
-  ScaleControlProps,
-  ...boxProps
-}: Props) => {
   return (
     <Box
       sx={{
         position: 'relative',
         width: '100%',
         height: '100vh',
-        ...boxProps.sx,
       }}
-      {...boxProps}
     >
-      <MapBox
-        initialViewState={initialViewState}
-        mapStyle={defaultStyles}
-        mapboxAccessToken={token}
-        style={{ width: '100%', height: '100%' }}
-        attributionControl={false}
-      >
+      <BaseMap mapStyle={styleConfig.style}>
         <GeolocateControl
           position="bottom-right"
           trackUserLocation
-          {...GeolocateControlProps}
+          style={{ marginBottom: '74px' }}
         />
         <NavigationControl
           position="bottom-right"
           showCompass={false}
-          {...NavigationControlProps}
+          style={{ marginBottom: '14px' }}
         />
-        <ScaleControl {...ScaleControlProps} />
-      </MapBox>
-      <StyleSwitcher />
+        <ScaleControl />
+      </BaseMap>
+      <MapStyleSwitcher
+        styleConfig={styleConfig}
+        onStyleConfig={handleStyleConfig}
+      />
     </Box>
   );
-};
-
-const token =
-  'pk.eyJ1Ijoib2Rpb21pbyIsImEiOiJjbHpzZ3dscDkwMGJyMm1zOHV1bzV2NHRlIn0.8XrYMChSyHTb1ltOpUD15w';
-
-const defaultStyles = 'mapbox://styles/mapbox/streets-v11';
-
-const initialViewState: Partial<ViewState> = {
-  latitude: 48.3794,
-  longitude: 31.1656,
-  zoom: 5,
-  bearing: 0,
-  pitch: 0,
 };

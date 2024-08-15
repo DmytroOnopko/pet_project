@@ -20,11 +20,11 @@ import { TitleLogo } from './components/TitleLogo';
 import SortIcon from '@mui/icons-material/Sort';
 
 export const Shell = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const handleToggle = () => setOpen((state) => !state);
-
   const theme = useTheme();
   const mdDownBreakpoint = useMediaQuery(theme.breakpoints.down('md'));
+
+  const [open, setOpen] = useState<boolean>(!mdDownBreakpoint);
+  const handleToggle = () => setOpen((state) => !state);
 
   const items = useSideBarItems();
 

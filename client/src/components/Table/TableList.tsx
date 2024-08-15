@@ -1,4 +1,4 @@
-import { Box, TablePaginationProps } from '@mui/material';
+import { TablePaginationProps } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
 
 import { TableProos } from './types';
